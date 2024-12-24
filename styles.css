@@ -1,0 +1,162 @@
+/* Base Styles */
+body {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation Styles */
+.navbar-blur {
+    background-color: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-link {
+    color: #ffffff;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+/* Hero Section Styles */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    background: rgba(0,0,0,0.5);
+}
+
+/* Project Card Styles */
+.project-card {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+/* Gallery Styles */
+#featured-image {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#featured-image.portrait-view {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#featured-image.fullscreen {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.95);
+    margin: 0 !important;
+    z-index: 9999;
+    cursor: zoom-out;
+}
+
+.thumbnail-gallery {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Form Styles */
+.form-input {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Interactive Elements */
+.project-hover {
+    transition: transform 0.3s ease;
+}
+
+.project-hover:hover {
+    transform: scale(1.05);
+}
+
+/* Form Input Styles */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Transition Effects */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Animation Classes */
+.animate__animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+/* Gallery Navigation */
+#prev-image,
+#next-image {
+    transition: background-color 0.3s ease;
+}
+
+#thumbnail-gallery {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    #featured-image.portrait-view {
+        width: 80% !important;
+    }
+
+    #featured-image {
+        height: 50vh !important;
+    }
+}
