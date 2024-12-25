@@ -217,27 +217,32 @@ class ProjectGallery {
     }
 
     handleProjectClick(e) {
-        const projectCard = e.currentTarget;
-        const projectId = projectCard.dataset.project;
+        const projectId = e.currentTarget.dataset.project;
         const gallery = document.getElementById('expanded-gallery');
         
         if (this.currentProject === projectId && gallery.classList.contains('block')) {
             return;
         }
-
+    
         this.currentProject = projectId;
         this.currentImageIndex = 0;
         
+        // Preload all project images
+        this.projectImages[projectId].forEach(imageSrc => {
+            const img = new Image();
+            img.src = imageSrc;
+        });
+    
         gallery.classList.remove('hidden');
         gallery.classList.add('block');
-
+    
         const offset = 100;
         const galleryPosition = gallery.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({
             top: galleryPosition,
             behavior: 'smooth'
         });
-
+    
         this.updateFeaturedImage();
         this.updateThumbnails();
     }
@@ -297,7 +302,14 @@ class ProjectGallery {
         const featuredImage = document.getElementById('featured-image');
         const imageUrl = this.projectImages[this.currentProject][this.currentImageIndex];
         
-        featuredImage.style.transition = 'all 0.3s ease-in-out';
+        // Preload next image
+        if (this.projectImages[this.currentProject][this.currentImageIndex + 1]) {
+            const nextImage = new Image();
+            nextImage.src = this.projectImages[this.currentProject][this.currentImageIndex + 1];
+        }
+        
+        // Add loading state
+        featuredImage.style.opacity = '0.5';
         
         const img = new Image();
         img.src = imageUrl;
@@ -308,20 +320,14 @@ class ProjectGallery {
             if (aspectRatio < 1) {
                 featuredImage.style.width = '40%';
                 featuredImage.style.margin = '0 auto';
-                featuredImage.style.height = '75vh';
-                featuredImage.classList.add('portrait-view');
             } else {
                 featuredImage.style.width = '100%';
                 featuredImage.style.margin = '0';
-                featuredImage.style.height = '600px';
-                featuredImage.classList.remove('portrait-view');
             }
             
             featuredImage.style.backgroundImage = `url(${imageUrl})`;
-            featuredImage.style.backgroundSize = 'contain';
-            featuredImage.style.backgroundPosition = 'center';
-            featuredImage.style.backgroundRepeat = 'no-repeat';
-            featuredImage.style.cursor = 'pointer';
+            featuredImage.style.opacity = '1';
+            featuredImage.style.transition = 'opacity 0.3s ease-in-out';
         };
     }
 }
